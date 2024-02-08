@@ -10,6 +10,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+jwt:
+  header: Authorization
+  prefix: Bearer
+  secret: lhjljlasndflasjdkfasdkfnasdasjidkflajsdkfahsdfjkafewfawefwaefeawfw
+  accessExpiration: 604800
 
 server:
   port: 8080
