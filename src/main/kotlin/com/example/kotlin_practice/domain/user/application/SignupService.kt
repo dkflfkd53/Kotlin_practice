@@ -12,6 +12,8 @@ class SignupService(
     fun signup(request: SignupRequest) {
         userRepository.save(
             User(
+                accountId = request.accountId,
+                password = request.password,
                 userName = request.userName
             )
         )

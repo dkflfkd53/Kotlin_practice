@@ -7,6 +7,8 @@ import jakarta.persistence.Id
 
 @Entity
 class User(
+    val accountId: String,
+    val password: String,
     val userName: String
 ) {
     @Id
