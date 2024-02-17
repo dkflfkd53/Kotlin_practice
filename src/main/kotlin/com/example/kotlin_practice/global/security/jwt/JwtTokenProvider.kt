@@ -58,10 +58,10 @@ class JwtTokenProvider(
         }
     }
 
-    fun receiveToken(userName: String?): TokenResponse {
-        val user: User = userRepository.findByUserName(userName!!)
+    fun receiveToken(accountId: String?): TokenResponse {
+        val user: User = userRepository.findByAccountId(accountId!!)
         return TokenResponse(
-            accessToken = createAccessToken(userName)
+            accessToken = createAccessToken(accountId)
         )
     }
 

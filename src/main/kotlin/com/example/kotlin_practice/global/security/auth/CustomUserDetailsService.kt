@@ -13,8 +13,8 @@ class CustomUserDetailsService(
     private val userRepository: UserRepository,
 ) : UserDetailsService {
 
-    override fun loadUserByUsername(userName: String): UserDetails {
-            val user: User = userRepository.findByUserName(userName)
+    override fun loadUserByUsername(accountId: String): UserDetails {
+            val user: User = userRepository.findByAccountId(accountId)
 
             return CustomUserDetails(user)
     }
