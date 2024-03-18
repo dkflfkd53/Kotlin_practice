@@ -13,7 +13,7 @@ spring:
 jwt:
   header: Authorization
   prefix: Bearer
-  secret: lhjljlasndflasjdkfasdkfnasdasjidkflajsdkfahsdfjkafewfawefwaefeawfw
+  secret: tmpasdhfjksahdfkashdfkasjhdfkdsajhdfjksahdfjkashdfjksahdfjkasdhfkjs
   accessExpiration: 604800
 
 server:
