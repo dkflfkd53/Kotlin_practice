@@ -1,9 +1,6 @@
 package com.example.kotlin_practice.domain.post.api
 
-import com.example.kotlin_practice.domain.post.application.CreatePostService
-import com.example.kotlin_practice.domain.post.application.GetPostListService
-import com.example.kotlin_practice.domain.post.application.ReadPostDetailsService
-import com.example.kotlin_practice.domain.post.application.UpdatePostService
+import com.example.kotlin_practice.domain.post.application.*
 import com.example.kotlin_practice.domain.post.dto.request.PostRequest
 import com.example.kotlin_practice.domain.post.dto.response.PostListResponse
 import com.example.kotlin_practice.domain.post.dto.response.PostResponse
@@ -16,7 +13,8 @@ class PostController(
     private val createPostService: CreatePostService,
     private val readPostDetailsService: ReadPostDetailsService,
     private val getPostListService: GetPostListService,
-    private val updatePostService: UpdatePostService
+    private val updatePostService: UpdatePostService,
+    private val deletePostService: DeletePostService
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -38,5 +36,10 @@ class PostController(
     @PatchMapping("/{postId}")
     fun updatePost(@PathVariable postId: Long, @RequestBody request: PostRequest) {
         updatePostService.updatePost(postId, request)
+    }
+
+    @DeleteMapping("/{postId}")
+    fun deletePost(@PathVariable postId: Long) {
+        deletePostService.deletePost(postId)
     }
 }
