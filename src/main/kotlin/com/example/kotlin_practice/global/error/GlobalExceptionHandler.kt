@@ -2,14 +2,12 @@ package com.example.kotlin_practice.global.error
 
 import com.example.kotlin_practice.global.error.exception.BusinessException
 import com.example.kotlin_practice.global.error.exception.ErrorCode
-import lombok.extern.slf4j.Slf4j
 import org.hibernate.exception.ConstraintViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
-@Slf4j
 @RestControllerAdvice
 class GlobalExceptionHandler {
     //비즈니스 로직에서의 에러
