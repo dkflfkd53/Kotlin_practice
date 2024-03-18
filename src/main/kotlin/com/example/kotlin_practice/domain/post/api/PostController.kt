@@ -3,6 +3,7 @@ package com.example.kotlin_practice.domain.post.api
 import com.example.kotlin_practice.domain.post.application.CreatePostService
 import com.example.kotlin_practice.domain.post.application.GetPostListService
 import com.example.kotlin_practice.domain.post.application.ReadPostDetailsService
+import com.example.kotlin_practice.domain.post.application.UpdatePostService
 import com.example.kotlin_practice.domain.post.dto.request.PostRequest
 import com.example.kotlin_practice.domain.post.dto.response.PostListResponse
 import com.example.kotlin_practice.domain.post.dto.response.PostResponse
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.*
 class PostController(
     private val createPostService: CreatePostService,
     private val readPostDetailsService: ReadPostDetailsService,
-    private val getPostListService: GetPostListService
+    private val getPostListService: GetPostListService,
+    private val updatePostService: UpdatePostService
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,5 +33,10 @@ class PostController(
     @GetMapping("/all")
     fun getPostList(): List<PostListResponse> {
         return getPostListService.getPostList()
+    }
+
+    @PatchMapping("/{postId}")
+    fun updatePost(@PathVariable postId: Long, @RequestBody request: PostRequest) {
+        updatePostService.updatePost(postId, request)
     }
 }
