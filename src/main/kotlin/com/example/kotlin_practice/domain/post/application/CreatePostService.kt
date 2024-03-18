@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service
 class CreatePostService(
     private val postRepository: PostRepository
 ) {
-
     fun createPost(request: PostRequest) {
         postRepository.save(
             Post(

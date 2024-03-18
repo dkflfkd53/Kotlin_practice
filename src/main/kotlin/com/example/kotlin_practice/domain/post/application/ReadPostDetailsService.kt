@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service
 class ReadPostDetailsService(
     private val postRepository: PostRepository
 ) {
-
     fun readPostDetails(postId: Long): PostResponse {
         val post: Post = postRepository.findByPostId(postId)
 
