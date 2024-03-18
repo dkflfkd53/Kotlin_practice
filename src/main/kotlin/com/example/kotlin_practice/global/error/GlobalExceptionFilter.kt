@@ -23,22 +23,27 @@ class GlobalExceptionFilter(
             filterChain.doFilter(request, response)
         } catch (e: BusinessException) {
             val errorCode: ErrorCode = e.errorCode
-            writerErrorResponse(
+            writeErrorResponse(
                 response,
                 errorCode.statusCode,
                 ErrorResponse.of(errorCode, errorCode.message)
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            writerErrorResponse(response, response.status, ErrorResponse.of(response.status, e.message!!))
+            writeErrorResponse(response, response.status, ErrorResponse.of(response.status, e.message!!))
         }
     }
 
     @Throws(IOException::class)
-    private fun writerErrorResponse(response: HttpServletResponse, statusCode: Int, errorResponse: ErrorResponse) {
-        response.status = statusCode
+    private fun writeErrorResponse(
+        response: HttpServletResponse,
+        status: Int,
+        errorResponse:
+        ErrorResponse
+    ) {
+        response.status = status
         response.contentType = "application/json"
         response.characterEncoding = "UTF-8"
-        objectMapper!!.writeValue(response.writer, errorResponse)
+        objectMapper.writeValue(response.writer, errorResponse)
     }
 }
