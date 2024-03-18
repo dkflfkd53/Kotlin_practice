@@ -1,7 +1,5 @@
 package com.example.kotlin_practice.global.security.jwt
 
-import com.example.kotlin_practice.domain.user.dao.UserRepository
-import com.example.kotlin_practice.domain.user.domain.User
 import com.example.kotlin_practice.global.security.auth.CustomUserDetailsService
 import com.example.kotlin_practice.global.security.jwt.dto.response.TokenResponse
 import com.example.kotlin_practice.global.security.jwt.exception.ExpiredTokenException
@@ -21,19 +19,19 @@ import java.util.*
 @Component
 class JwtTokenProvider(
     private val jwtProperties: JwtProperties,
-    private val userRepository: UserRepository,
     private val customUserDetailsService: CustomUserDetailsService
 ) {
 
     // access token 생성
-    fun createAccessToken(classNumber: String?): String {
+    fun createAccessToken(accountId: String?): String {
         val now = Date()
+
         return Jwts.builder()
-            .setSubject(classNumber)
+            .setSubject(accountId)
+            .signWith(SignatureAlgorithm.HS256, jwtProperties.secret)
             .claim("type", "access")
             .setIssuedAt(now)
             .setExpiration(Date(now.time + jwtProperties.accessExpiration * 1000))
-            .signWith(SignatureAlgorithm.HS256, jwtProperties.secret)
             .compact()
     }
 
@@ -59,9 +57,11 @@ class JwtTokenProvider(
     }
 
     fun receiveToken(accountId: String?): TokenResponse {
-        val user: User = userRepository.findByAccountId(accountId!!)
+        val now: Date = Date()
+
         return TokenResponse(
-            accessToken = createAccessToken(accountId)
+            accessToken = createAccessToken(accountId),
+            accessExpiredAt = Date(now.time + jwtProperties.accessExpiration)
         )
     }
 
