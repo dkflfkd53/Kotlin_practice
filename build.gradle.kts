@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.regex.Pattern.compile
 
 plugins {
     id("org.springframework.boot") version "3.2.2"
@@ -32,11 +33,11 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.jsonwebtoken:jjwt:0.9.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    compileOnly("org.projectlombok:lombok")
     runtimeOnly("com.mysql:mysql-connector-j")
-    annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    compile("net.bytebuddy:byte-buddy:1.7.1")
+    implementation ("javax.xml.bind:jaxb-api:2.3.0")
 }
 
 tasks.withType<KotlinCompile> {
