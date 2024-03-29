@@ -1,8 +1,5 @@
 package com.example.kotlin_practice.global.error.exception
 
-import com.fasterxml.jackson.annotation.JsonFormat
-
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 enum class ErrorCode(
     val statusCode: Int,
     val message: String
@@ -14,6 +11,9 @@ enum class ErrorCode(
 
     // user
     PASSWORD_MISS_MATCH(401, "비밀번호가 일치하지 않습니다."),
+
+    // post
+    POST_NOT_FOUND(404, "게시글을 찾을 수 없습니다."),
 
     // general
     BAD_REQUEST(400, "프론트 탓..."),
